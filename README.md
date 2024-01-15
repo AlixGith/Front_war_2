@@ -86,7 +86,6 @@ Objectifs :
 
 ![Alt text](/readme_files/China_tree.PNG "")
 
-*Server client-side. Schéma à revoir, simplement illustratif :*
 
 
 # Code pour la triangulation de delaunay et la recherche du point le plus proche
