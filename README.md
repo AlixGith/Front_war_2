@@ -5,7 +5,7 @@ Date: 2023-12-14
 Lastmod : 
 Tags: ["Prog"]
 Description: "Article sur le dernier projet personnel."
-Draft: 
+Software: Unity 3D
 ---
 ![Alt text](/readme_files/pikes_shots.jpg "")
 
