@@ -78,6 +78,14 @@ Objectifs :
 
 ![Alt text](/readme_files/Mughal_tree.PNG "")
 
+*Civilisation Indienne, mindmap*
+
+![Alt text](/readme_files/India_tree.PNG "")
+
+*Civilisation Chinoise, mindmap*
+
+![Alt text](/readme_files/China_tree.PNG "")
+
 *Server client-side. Schéma à revoir, simplement illustratif :*
 
 
