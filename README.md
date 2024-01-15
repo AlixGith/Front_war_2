@@ -52,15 +52,19 @@ Objectifs :
 
 
 *Le principe du cycle en V sera mis en place.  Cycle en V réalisé sous Visio :*
+
 ![Alt text](/readme_files/Cycle_en_v.PNG "")
 
 *Server client-side. Schéma à revoir, simplement illustratif :*
+
 ![Alt text](/readme_files/reseau_spec.PNG "")
 
 *Exigence du cahier de spécification logiciel concernant les interfaces/menus :*
+
 ![Alt text](/readme_files/interfaces.PNG "")
 
 *Exigence du cahier de spécification logiciel concernant l'architecture de programmation, on définira ici le back-end comme ce qui ne se voit pas et le front-end comme ce qui se voit :*
+
 ![Alt text](/readme_files/Organigramme_p_2_page-0001.jpg "")
 ![Alt text](/readme_files/Organigramme_p_2_page-0002.jpg "")
 ![Alt text](/readme_files/Organigramme_p_2_page-0003.jpg "")
@@ -77,9 +81,11 @@ On utilise les librairies : UnityOctree et Triangle.NET
 3. Dessiner des lignes : Le composant LineRenderer de Unity peut être utilisé pour dessiner une ligne entre deux ou plusieurs points dans l'espace 3D. Une fois que l'on a les points les plus proches, on peut utiliser LineRenderer pour dessiner des lignes entre chaque point et son voisin le plus proche.
 
 *Résultat de triangulation des points en mouvement: *
+
 ![Alt text](/readme_files/triangulation_1.png "")
 
 *Résultat de triangulation des points statiques: *
+
 ![Alt text](/readme_files/triangulation_2.png "")
 
 Code fonctionnel contenant seulement la triangulation : 
