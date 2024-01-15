@@ -71,12 +71,12 @@ Objectifs :
 
 *Civilisation Astèques, mindmap*
 
-![Alt text](/readme_files/Cycle_en_v.PNG "")
+![Alt text](/readme_files/Aztec_tree.PNG "")
 
 
 *Civilisation Mongole, mindmap*
 
-![Alt text](/readme_files/Cycle_en_v.PNG "")
+![Alt text](/readme_files/Mughal_tree.PNG "")
 
 *Server client-side. Schéma à revoir, simplement illustratif :*
 
