@@ -69,6 +69,17 @@ Objectifs :
 ![Alt text](/readme_files/Organigramme_p_2_page-0002.jpg "")
 ![Alt text](/readme_files/Organigramme_p_2_page-0003.jpg "")
 
+*Civilisation Astèques, mindmap*
+
+![Alt text](/readme_files/Cycle_en_v.PNG "")
+
+
+*Civilisation Mongole, mindmap*
+
+![Alt text](/readme_files/Cycle_en_v.PNG "")
+
+*Server client-side. Schéma à revoir, simplement illustratif :*
+
 
 # Code pour la triangulation de delaunay et la recherche du point le plus proche
 
