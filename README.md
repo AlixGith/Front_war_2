@@ -86,6 +86,13 @@ Objectifs :
 
 ![Alt text](/readme_files/China_tree.PNG "")
 
+*Civilisation Française, mindmap*
+
+![Alt text](/readme_files/France_tree.PNG "")
+
+*Civilisation Espagnole, mindmap*
+
+![Alt text](/readme_files/Spain_tree.PNG "")
 
 
 # Code pour la triangulation de delaunay et la recherche du point le plus proche
