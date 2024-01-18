@@ -127,138 +127,115 @@ using System.Collections.Generic;
 
 public class triangulation_code : MonoBehaviour 
 {
-    public List<Transform> All_unit = new List<Transform>();
-    public List<Vector3> vertices = new List<Vector3>();
-    PointOctree<Vector3> octree;
+    // Unity objects.
+    List<Transform> All_unit = new List<Transform>();
+
+    // Triangle.NET vertices (class instance for better memory performance).
+    List<Vertex> vertices = new List<Vertex>();
+
+    // For better memory performance.
+    TrianglePool trianglePool = new TrianglePool();
+    ITriangulator triangulator = new Dwyer();
+
+    // To find nearest neighbours.
+    VertexCirculator vertexCirculator;
 
     LineRenderer lineRenderer;
-    Bounds bounds; 
+
 
     void Start()
     {
-        // Create a LineRenderer
-            lineRenderer = gameObject.GetComponent<LineRenderer>();
-            lineRenderer.widthMultiplier = 2f;
-                        // Create and populate the Octree with vertices
-            Bounds bounds = new Bounds(All_unit[0].position, All_unit[All_unit.Count-1].position*10); 
-
+        // Create a LineRenderer to display on screen
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
+        lineRenderer.widthMultiplier = 2f;
     }
-    void Update() 
+
+    void Update()
     {
-        if(All_unit !=null)
+        if (All_unit == null || All_unit.Count == 0) return;
+
+        int count = All_unit.Count;
+
+        lineRenderer.positionCount = 0;
+
+        vertices.Clear();
+
+        if (vertices.Capacity < count)
         {
+            vertices.EnsureCapacity(count);
+        }
 
-            lineRenderer.positionCount = 0;
+        // Copy the position
+        for (int i = 0; i < count; i++)
+        {
+            var pos = All_unit[i].position;
 
-            //octree = new PointOctree<Vector3>(bounds.size.x, bounds.center, 0);
-            vertices.Clear(); 
+            // IMPORTANT: set correct vertex id (corresponding to index in All_unit).
+            //            This will automatically establish the mapping between Unity
+            //            and Triangle.NET objects.
 
-            for (int i = 0; i < All_unit.Count; i++)
+            vertices.Add(new Vertex(pos.x, pos.z) { ID = i });
+        }
+
+        // Perform Delaunay triangulation on vertices
+
+        var mesh = (Mesh)triangulator.Triangulate(vertices, new Configuration(
+            () => RobustPredicates.Default,
+            () => trianglePool.Restart()));
+
+        vertexCirculator = new VertexCirculator(mesh);
+
+        // GET ALL THE Point from the triangulation in order to display it 
+
+        var positions_upt = new List<Vector3>();
+
+        foreach (var edge in mesh.Edges)
+        {
+            positions_upt.Add(All_unit[edge.P0].position);
+            positions_upt.Add(All_unit[edge.P1].position);
+        }
+
+        lineRenderer.SetPositions(positions_upt.ToArray());
+
+        // Find all nearest neighbors
+        for (int i = 0; i < count; i++)
+        {
+            var obj = All_unit[i];
+            int closedId = FindClosest(vertices[i]);
+
+            if (closedId < 0)
             {
-                vertices.Add(All_unit[i].position);
-                
+                // Something went wrong
             }
-
-
-            // Perform Delaunay triangulation on vertices
-            
-            var input = new Polygon(All_unit.Count);
-            
-            
-            foreach (var vertex in vertices)
+            else
             {
-                input.Add(new Vertex(vertex.x, vertex.z));
-                
-                //octree.Add(vertex, vertex);
+                var closest = All_unit[closedId];
             }
-
-            
-
-            // Generate mesh.
-            var options = new ConstraintOptions() { ConformingDelaunay = true};
-            var quality = new QualityOptions() { MinimumAngle = 30 };
-            
-            var mesh = input.Triangulate(options, quality);
-            
-            
-            // var config = new TriangleNet.Configuration();
-            
-            //mesh = triangulator.Triangulate(mesh,config);
-
-            //var smoother = new SimpleSmoother();
-
-            // Smooth mesh.
-            //smoother.Smooth(mesh, All_unit.Count*2, .05);
-
-            List<Vector3> newvertices = new List<Vector3>(); 
-
-
-            foreach (var vertex in mesh.Vertices)
-            {
-                newvertices.Add(new Vector3((float)vertex.X, 0, (float)vertex.Y));
-            }
-            
-           
-            
-            
-            //lineRenderer.material = new Material(Shader.Find("Particles/Standard Unlit"));
-            
-            lineRenderer.positionCount = mesh.Triangles.Count*3;
-            //lineRenderer.SetPositions(newvertices); 
-
-            
-            List<Vector3> positions_upt = new List<Vector3>(); 
-
-            foreach(var triangle in mesh.Triangles)
-            {
-                int label = triangle.Label;
-
-                if (label < 0 )
-                {
-                    Debug.Log("MFEM element attributes must be positive.");
-                }else{
-                    if(triangle.GetVertexID(0) < newvertices.Count && triangle.GetVertexID(0) >=0 )
-                        {positions_upt.Add(newvertices[triangle.GetVertexID(0)]);}
-                    if(triangle.GetVertexID(1) < newvertices.Count && triangle.GetVertexID(1) >=0 )
-                        {positions_upt.Add(newvertices[triangle.GetVertexID(1)]);}
-                    if(triangle.GetVertexID(2) < newvertices.Count && triangle.GetVertexID(2) >=0 )
-                        {positions_upt.Add(newvertices[triangle.GetVertexID(2)]);}
-                }
-                
-                
-
-            }
-
-            lineRenderer.SetPositions(positions_upt.ToArray()); 
-            // Find closest points and draw lines
-            /*
-            for (int i = 0; i < newvertices.Count; i++)
-            {
-                //var closestPoint = FindNearestPoint(newvertices[i], newvertices);
-                lineRenderer.SetPosition(i * 2, newvertices[i]);
-                lineRenderer.SetPosition(i * 2 + 1, closestPoint);
-            }
-            */
-           
         }
     }
 
-    Vector3 FindNearestPoint(Vector3 point, List<Vector3> vertices)
+    int FindClosest(Vertex vertex)
     {
-        float closestDistance = float.MaxValue;
-        Vector3 closestpoint = Vector3.zero;
+        if (vertexCirculator == null) return -1;
 
-        foreach(var vertex in vertices)
+        Vertex closest = null;
+        double closestDist = double.MaxValue;
+
+        foreach (var neighbor in vertexCirculator.EnumerateVertices(vertex))
         {
-            float distance = Vector3.Distance(new Vector3(point.x,0,point.z), new Vector3(vertex.x, 0, vertex.z)); 
+            var dx = (vertex.X - neighbor.X);
+            var dy = (vertex.Y - neighbor.Y);
 
-            if(distance < closestDistance)
+            var squareDist = dx * dx + dy * dy;
+
+            if (squareDist < closestDist)
             {
-                closestDistance = distance; 
-                closestpoint = vertex; 
+                closest = neighbor;
+                closestDist = squareDist;
             }
         }
-        return closestpoint; 
+
+        return closest == null ? -2 : closest.ID;
     }
 }
 
