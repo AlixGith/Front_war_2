@@ -94,10 +94,13 @@ Objectifs :
 
 ![Alt text](/readme_files/Spain_tree.PNG "")
 
+# Code pour le fog of war 
+
+On utilise la librairie : TasharenFogOfWar : https://github.com/insominx/TasharenFogOfWar
 
 # Code pour la triangulation de delaunay et la recherche du point le plus proche
 
-On utilise les librairies : Triangle.NET : https://github.com/wo80/Triangle.NET/
+On utilise la librairie : Triangle.NET : https://github.com/wo80/Triangle.NET/
 
 1. Triangulation : Unity n'a pas de support intégré pour la triangulation de Delaunay. Cependant, on peut utiliser des bibliothèques tierces comme Triangle.NET qui peuvent gérer cela. La triangulation de Delaunay est un algorithme qui peut être utilisé pour générer un maillage à partir d'une liste de points Vector3. Il génère des triangles de telle sorte qu'aucun point ne se trouve à l'intérieur du cercle circonscrit d'un triangle.
 
