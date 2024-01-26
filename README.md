@@ -94,6 +94,15 @@ Objectifs :
 
 ![Alt text](/readme_files/Spain_tree.PNG "")
 
+*Civilisation Ottomane, mindmap*
+
+![Alt text](/readme_files/ottoman_tree.PNG "")
+
+*Civilisation Japonaise, mindmap*
+
+![Alt text](/readme_files/Japanese_tree.PNG "")
+
+
 # Code pour le fog of war 
 
 On utilise la librairie : TasharenFogOfWar : https://github.com/insominx/TasharenFogOfWar
