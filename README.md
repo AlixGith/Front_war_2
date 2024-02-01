@@ -106,10 +106,18 @@ Objectifs :
 
 ![Alt text](/readme_files/Japanese_tree.PNG "")
 
+# Code pour l'isométrie
+
+![Alt text](/img/collections/iso_build.PNG "")
+
+![Alt text](/img/collections/iso_map.PNG "")
 
 # Code pour le fog of war 
 
 On utilise la librairie : TasharenFogOfWar : https://github.com/insominx/TasharenFogOfWar
+
+![Alt text](/img/collections/unite_differentes.PNG "")
+
 
 # Code pour la triangulation de delaunay et la recherche du point le plus proche
 
