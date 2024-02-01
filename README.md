@@ -108,15 +108,15 @@ Objectifs :
 
 # Code pour l'isométrie
 
-![Alt text](/img/collections/iso_build.PNG "")
+![Alt text](/img/collections/iso_build.png "")
 
-![Alt text](/img/collections/iso_map.PNG "")
+![Alt text](/img/collections/iso_map.png "")
 
 # Code pour le fog of war 
 
 On utilise la librairie : TasharenFogOfWar : https://github.com/insominx/TasharenFogOfWar
 
-![Alt text](/img/collections/unite_differentes.PNG "")
+![Alt text](/img/collections/unite_differentes.png "")
 
 
 # Code pour la triangulation de delaunay et la recherche du point le plus proche
