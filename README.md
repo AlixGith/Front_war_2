@@ -73,6 +73,9 @@ Objectifs :
 
 ![Alt text](/readme_files/Aztec_tree.PNG "")
 
+*Pre-art exemples* 
+
+![Alt text](/readme_files/IMG_20240215_112655.jpg "")
 
 *Civilisation Mongole, mindmap*
 
