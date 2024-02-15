@@ -134,11 +134,13 @@ On utilise la librairie : Triangle.NET : https://github.com/wo80/Triangle.NET/
 
 *Résultat de triangulation des points en mouvement: *
 
-![Alt text](/readme_files/triangulation_1.png "")
+![Alt text](/readme_files/aztec_1.png "")
+
+![Alt text](/readme_files/aztec_3.png "")
 
 *Résultat de triangulation des points statiques: *
 
-![Alt text](/readme_files/triangulation_2.png "")
+![Alt text](/readme_files/aztec_2.png "")
 
 Code fonctionnel contenant seulement la triangulation : 
 
